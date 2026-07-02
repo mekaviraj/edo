@@ -151,10 +151,10 @@ export default function Home() {
         {/* Header */}
         <div className="text-center space-y-4">
           <h1 className="text-4xl font-extrabold tracking-tight text-emerald-900">
-            Jrp
+            IT3 major project Teams
 
           </h1>
-          <p className="mt-2 text-sm text-emerald-700">
+          {/* <p className="mt-2 text-sm text-emerald-700">
             IT3 major project Teams
           </p>
           <div className="flex flex-col items-center justify-center">
@@ -163,8 +163,8 @@ export default function Home() {
               alt="modiii"
               className="w-32 h-auto rounded-lg shadow-sm border border-emerald-100"
             />
-            <span className="text-xs text-emerald-700/70 mt-1.5 font-medium">Pradhan mantri stmg yojana</span>
-          </div>
+            <span className="text-xs text-emerald-700/70 mt-1.5 font-medium">Pradhan mantri stmg</span>
+          </div> */}
         </div>
 
         {/* Status Messages */}
