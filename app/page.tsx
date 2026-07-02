@@ -149,13 +149,22 @@ export default function Home() {
     <main className="min-h-screen bg-emerald-50/20 text-emerald-950 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto space-y-12">
         {/* Header */}
-        <div className="text-center">
+        <div className="text-center space-y-4">
           <h1 className="text-4xl font-extrabold tracking-tight text-emerald-900">
-            TEAM CREATOR
+            Jrp
+
           </h1>
           <p className="mt-2 text-sm text-emerald-700">
-            Group students into 3-member teams across clusters (Green Theme)
+            IT3 major project Teams
           </p>
+          <div className="flex flex-col items-center justify-center">
+            <img
+              src="/modiii.jpeg"
+              alt="modiii"
+              className="w-32 h-auto rounded-lg shadow-sm border border-emerald-100"
+            />
+            <span className="text-xs text-emerald-700/70 mt-1.5 font-medium">Pradhan mantri stmg yojana</span>
+          </div>
         </div>
 
         {/* Status Messages */}
