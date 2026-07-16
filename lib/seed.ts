@@ -3,6 +3,7 @@ import { Student, Team } from './models';
 import mongoose from 'mongoose';
 import * as dotenv from 'dotenv';
 import path from 'path';
+import fs from 'fs';
 
 // Load environment variables from .env.local
 dotenv.config({ path: path.resolve(process.cwd(), '.env.local') });
@@ -33,17 +34,36 @@ async function seed() {
     await Team.deleteMany({});
 
     console.log('Generating seed data...');
-    const studentsData = [];
-    for (let i = 1; i <= 72; i++) {
-      const roll = `22CS${String(i).padStart(3, '0')}`;
-      const firstName = firstNames[(i - 1) % firstNames.length];
-      const lastName = lastNames[(i - 1) % lastNames.length];
-      const cluster = ((i - 1) % 3) + 1; // 1, 2, 3
-      studentsData.push({
-        roll,
-        name: `${firstName} ${lastName}`,
-        cluster,
-      });
+    let studentsData = [];
+    const customJsonPath = path.resolve(process.cwd(), 'students.json');
+
+    if (fs.existsSync(customJsonPath)) {
+      console.log('Found custom students.json. Reading student list...');
+      const rawData = fs.readFileSync(customJsonPath, 'utf8');
+      studentsData = JSON.parse(rawData);
+
+      // Validate formatting and normalize roll numbers
+      for (const st of studentsData) {
+        const roll = st.roll || st.roll_number;
+        if (!roll || !st.name || ![1, 2, 3].includes(Number(st.cluster))) {
+          throw new Error(`Invalid student data: ${JSON.stringify(st)}. Each student must contain "roll" or "roll_number" (string), "name" (string), and "cluster" (1, 2, or 3).`);
+        }
+        st.roll = String(roll); // Ensure it is stored as st.roll and cast to String
+      }
+      console.log(`Successfully loaded ${studentsData.length} students from students.json.`);
+    } else {
+      console.log('No custom students.json found. Generating mock students...');
+      for (let i = 1; i <= 72; i++) {
+        const roll = `22CS${String(i).padStart(3, '0')}`;
+        const firstName = firstNames[(i - 1) % firstNames.length];
+        const lastName = lastNames[(i - 1) % lastNames.length];
+        const cluster = ((i - 1) % 3) + 1; // 1, 2, 3
+        studentsData.push({
+          roll,
+          name: `${firstName} ${lastName}`,
+          cluster,
+        });
+      }
     }
 
     console.log(`Inserting ${studentsData.length} students...`);
