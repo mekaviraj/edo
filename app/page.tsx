@@ -287,7 +287,6 @@ export default function Home() {
                     <th scope="col" className="px-6 py-3">Cluster 2 Student</th>
                     <th scope="col" className="px-6 py-3">Cluster 3 Student</th>
                     <th scope="col" className="px-6 py-3">Mentor</th>
-                    <th scope="col" className="px-6 py-3 text-right">Action</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-emerald-50">
@@ -304,14 +303,6 @@ export default function Home() {
                         <td className="px-6 py-4 text-emerald-950">{c2Member ? c2Member.name : 'N/A'}</td>
                         <td className="px-6 py-4 text-emerald-950">{c3Member ? c3Member.name : 'N/A'}</td>
                         <td className="px-6 py-4 text-emerald-950">{team.mentor || 'None'}</td>
-                        <td className="px-6 py-4 text-right">
-                          <button
-                            onClick={() => handleDeleteTeam(team._id)}
-                            className="text-red-600 hover:text-red-800 font-semibold cursor-pointer"
-                          >
-                            Delete
-                          </button>
-                        </td>
                       </tr>
                     );
                   })}
